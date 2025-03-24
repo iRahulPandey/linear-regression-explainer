@@ -12,7 +12,7 @@
  * @param {function} completionCallback - Function to call when complete
  */
 function runGradientDescent(data, initialSlope, initialIntercept, updateCallback, completionCallback) {
-    if (data.length < 2) {
+    if (!data || data.length < 2) {
         alert("Please add at least 2 data points to run gradient descent");
         if (completionCallback) completionCallback();
         return;

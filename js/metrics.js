@@ -11,7 +11,7 @@
  * @returns {Object} - Object containing all calculated metrics
  */
 function calculateMetrics(data, slope, intercept) {
-    if (data.length === 0) return {
+    if (!data || data.length === 0) return {
         sse: 0, 
         mse: 0, 
         rmse: 0, 
@@ -62,9 +62,16 @@ function calculateMetrics(data, slope, intercept) {
  * @param {Object} metrics - The metrics object returned from calculateMetrics
  */
 function updateMetricsDisplay(metrics) {
-    document.getElementById("sse-value").textContent = metrics.sse;
-    document.getElementById("mse-value").textContent = metrics.mse;
-    document.getElementById("rmse-value").textContent = metrics.rmse;
-    document.getElementById("mae-value").textContent = metrics.mae;
-    document.getElementById("r2-value").textContent = metrics.r2;
+    // Add console logging to debug
+    console.log("Updating metrics display:", metrics);
+    
+    try {
+        document.getElementById("sse-value").textContent = metrics.sse;
+        document.getElementById("mse-value").textContent = metrics.mse;
+        document.getElementById("rmse-value").textContent = metrics.rmse;
+        document.getElementById("mae-value").textContent = metrics.mae;
+        document.getElementById("r2-value").textContent = metrics.r2;
+    } catch (error) {
+        console.error("Error updating metrics display:", error);
+    }
 }
