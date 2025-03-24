@@ -1,0 +1,156 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression Explainer</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/visualization.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Linear Regression Explainer</h1>
+            <p>An interactive visualization to help understand linear regression concepts</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#visualization">Visualization</a></li>
+                <li><a href="#explanation">Explanation</a></li>
+                <li><a href="#metrics">Metrics</a></li>
+                <li><a href="https://github.com/yourusername/linear-regression-explainer">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="visualization">
+            <h2>Interactive Linear Regression</h2>
+            <div class="visualization-container">
+                <div class="controls">
+                    <div class="slider-container">
+                        <label for="slope">Slope (m): <span id="slope-value">1.0</span></label>
+                        <input type="range" id="slope" min="-2" max="2" step="0.1" value="1">
+                    </div>
+                    <div class="slider-container">
+                        <label for="intercept">Intercept (b): <span id="intercept-value">0.0</span></label>
+                        <input type="range" id="intercept" min="-2" max="2" step="0.1" value="0">
+                    </div>
+                    <div class="button-container">
+                        <button id="reset-data">Reset Data</button>
+                        <button id="run-gradient-descent">Run Gradient Descent</button>
+                        <button id="add-outlier">Add Outlier</button>
+                    </div>
+                </div>
+                <div class="plot-container">
+                    <svg id="plot" width="600" height="400"></svg>
+                </div>
+                <div class="metrics-table">
+                    <h3>Error Metrics</h3>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>SSE</td>
+                            <td id="sse-value">0.0</td>
+                            <td>Sum of Squared Errors - Heavily affected by outliers</td>
+                        </tr>
+                        <tr>
+                            <td>MSE</td>
+                            <td id="mse-value">0.0</td>
+                            <td>Mean Squared Error - Average of squared errors</td>
+                        </tr>
+                        <tr>
+                            <td>RMSE</td>
+                            <td id="rmse-value">0.0</td>
+                            <td>Root Mean Squared Error - Interpretable in original units</td>
+                        </tr>
+                        <tr>
+                            <td>MAE</td>
+                            <td id="mae-value">0.0</td>
+                            <td>Mean Absolute Error - Less sensitive to outliers</td>
+                        </tr>
+                        <tr>
+                            <td>R²</td>
+                            <td id="r2-value">0.0</td>
+                            <td>R-Squared - Proportion of variance explained</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="user-instructions">
+                    <p>Click on the plot to add points. Click on existing points to remove them.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="explanation">
+            <h2>Understanding Linear Regression</h2>
+            <div class="explanation-content">
+                <div class="explanation-item">
+                    <h3>The Linear Model</h3>
+                    <p>Linear regression finds the relationship between variables by fitting a line to the data.</p>
+                    <p>The line is defined by the equation: <strong>y = mx + b</strong> where:</p>
+                    <ul>
+                        <li><strong>m</strong> is the slope (how steep the line is)</li>
+                        <li><strong>b</strong> is the y-intercept (where the line crosses the y-axis)</li>
+                    </ul>
+                    <img src="assets/images/line-equation.svg" alt="Linear regression equation" class="equation-image">
+                </div>
+
+                <div class="explanation-item">
+                    <h3>Loss Functions</h3>
+                    <p>Loss functions measure how well the line fits the data. Common loss functions include:</p>
+                    <ul>
+                        <li><strong>Sum of Squared Errors (SSE)</strong>: Sum of all squared differences between predicted and actual values</li>
+                        <li><strong>Mean Squared Error (MSE)</strong>: Average of squared errors</li>
+                        <li><strong>Root Mean Squared Error (RMSE)</strong>: Square root of MSE, interpretable in original units</li>
+                        <li><strong>Mean Absolute Error (MAE)</strong>: Average of absolute differences, less sensitive to outliers</li>
+                        <li><strong>R-squared (R²)</strong>: Proportion of variance explained by the model</li>
+                    </ul>
+                    <p>The dashed lines in the visualization show the errors for each point.</p>
+                </div>
+
+                <div class="explanation-item">
+                    <h3>Gradient Descent</h3>
+                    <p>Gradient descent is an optimization algorithm that finds the best parameters by:</p>
+                    <ol>
+                        <li>Starting with initial values for slope and intercept</li>
+                        <li>Calculating the gradient (direction of steepest increase) of the loss function</li>
+                        <li>Updating parameters in the opposite direction of the gradient</li>
+                        <li>Repeating until convergence</li>
+                    </ol>
+                    <img src="assets/images/gradient-descent.svg" alt="Gradient descent visualization" class="algorithm-image">
+                </div>
+
+                <div class="explanation-item">
+                    <h3>Impact of Outliers</h3>
+                    <p>Outliers can significantly affect the regression line and different metrics respond differently:</p>
+                    <ul>
+                        <li>Squared error metrics (SSE, MSE, RMSE) are highly sensitive to outliers</li>
+                        <li>MAE is more robust against outliers</li>
+                        <li>R² can become negative when outliers make the model worse than a horizontal line</li>
+                    </ul>
+                    <p>Try adding outliers to see their impact on different metrics!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created with ❤️ | <a href="https://github.com/iRahulPandey/linear-regression-explainer.git">GitHub Repository</a></p>
+    </footer>
+
+    <!-- Load JavaScript files -->
+    <script src="js/utils.js"></script>
+    <script src="js/metrics.js"></script>
+    <script src="js/dataManager.js"></script>
+    <script src="js/gradientDescent.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
