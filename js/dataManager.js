@@ -14,8 +14,8 @@ const initialData = [
     {x: 7, y: 7, isOutlier: false}
 ];
 
-// Current data points
-let data = [...initialData];
+// Current data points - Make this a global variable by using window
+window.data = [...initialData];
 
 // Counter for generating different outliers
 let outlierCounter = 0;
@@ -25,9 +25,9 @@ let outlierCounter = 0;
  * @returns {Array} - The reset data array
  */
 function resetData() {
-    data = [...initialData];
+    window.data = [...initialData];
     outlierCounter = 0;
-    return data;
+    return window.data;
 }
 
 /**
@@ -39,7 +39,7 @@ function resetData() {
  */
 function addDataPoint(x, y, isOutlier = false) {
     const newPoint = {x, y, isOutlier};
-    data.push(newPoint);
+    window.data.push(newPoint);
     return newPoint;
 }
 
@@ -49,8 +49,8 @@ function addDataPoint(x, y, isOutlier = false) {
  * @returns {Array} - The updated data array
  */
 function removeDataPoint(point) {
-    data = data.filter(p => p !== point);
-    return data;
+    window.data = window.data.filter(p => p !== point);
+    return window.data;
 }
 
 /**

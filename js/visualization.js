@@ -80,6 +80,8 @@ function initVisualization() {
     setupEventHandlers();
 }
 
+// Update this part of the visualization.js file
+
 /**
  * Update the visualization with current data and parameters
  */
@@ -96,9 +98,9 @@ function updateVisualization() {
         .attr("x2", xScale(x2))
         .attr("y2", yScale(y2));
     
-    // Update error lines
+    // Update error lines - Use window.data instead of data
     const errorLines = errorLinesGroup.selectAll(".error-line")
-        .data(data);
+        .data(window.data);
     
     errorLines.exit().remove();
     
@@ -111,9 +113,9 @@ function updateVisualization() {
         .attr("x2", d => xScale(d.x))
         .attr("y2", d => yScale(slope * d.x + intercept));
     
-    // Update data points
+    // Update data points - Use window.data instead of data
     const points = pointsGroup.selectAll(".data-point")
-        .data(data);
+        .data(window.data);
     
     points.exit().remove();
     
@@ -132,9 +134,11 @@ function updateVisualization() {
             event.stopPropagation();
             removeDataPoint(d);
             updateVisualization();
-            updateMetricsDisplay(calculateMetrics(data, slope, intercept));
+            updateMetricsDisplay(calculateMetrics(window.data, slope, intercept));
         });
-        updateMetricsDisplay(calculateMetrics(data, slope, intercept));
+    
+    // Update metrics display with window.data
+    updateMetricsDisplay(calculateMetrics(window.data, slope, intercept));
 }
 
 /**
