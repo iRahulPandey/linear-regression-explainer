@@ -1,6 +1,6 @@
 # Linear Regression Explainer
 
-An interactive visualization to help understand linear regression concepts, inspired by [CNN Explainer](https://github.com/iRahulPandey/linear-regression-explainer.git).
+An interactive visualization to help understand linear regression concepts
 
 ## Overview
 
